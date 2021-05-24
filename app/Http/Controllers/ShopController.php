@@ -7,15 +7,7 @@ use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+   
 
     /**
      * Show the form for creating a new resource.
@@ -25,6 +17,7 @@ class ShopController extends Controller
     public function create()
     {
         //
+        return view('shops.create');
     }
 
     /**
@@ -58,6 +51,7 @@ class ShopController extends Controller
     public function edit(Shop $shop)
     {
         //
+        return 'desde edit';
     }
 
     /**

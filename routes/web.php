@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,4 +20,7 @@ Route::get('/', function () {
 
 Auth::routes(['verify' =>true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['middleware'=>['auth','verified']], function(){
+    Route::get('/shop/create',[ShopController::class, 'create'])->name('shop.create');
+    Route::get('/shop/edit',[ShopController::class, 'edit'])->name('shop.edit');
+});
