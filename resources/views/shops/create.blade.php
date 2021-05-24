@@ -92,6 +92,28 @@
                     <div class="form-group">
                         <div id="mapa" style="height:400px"></div>
                     </div>
+
+                    <p class="info">Confirm that the next field are correct</p>
+
+                    <div class="form-group">
+                        <label for="address">Address</label>
+
+                        <input
+                            type="text"
+                            id="address"
+                            class="form-control @error('address') is-invalid @enderror"
+                            placeholder="address"
+                            value="{{old('address')}}"
+                        >
+                        @error('address')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>   
+                        @enderror
+                    </div>
+
+                    <input type="hidden" id="lat" name="lat" value="{{old('lat')}}">
+                    <input type="hidden" id="lng" name="lng" value="{{old('lng')}}">
                 </fieldset>
 
             </form>
