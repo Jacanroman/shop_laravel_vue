@@ -9,7 +9,7 @@
                 class="col-md-9 col-xs-12 card card-body"
             >
                 <fieldset class="border p-4">
-                    <legend class="text-primary">Name and Category</legend>
+                    <legend class="text-primary">Name, Category and Main Image</legend>
 
                     <div class="form-group">
                         <label for="name">Name of the Shop</label>
@@ -46,6 +46,40 @@
                                         {{$category->name}}</option>
                             @endforeach
                         </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="main_image">Image</label>
+                        <input
+                            id="main_image"
+                            type="file"
+                            class="form-control @error('main_image') is-invalid @enderror"
+                            name="main_image"
+                            value="{{old('main_image')}}"
+                        >
+
+                        @error('main_image')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>   
+                        @enderror
+                    </div>
+
+
+                </fieldset>
+
+                <fieldset class="border p-4">
+                    <legend class="text-primary">Ubicacion</legend>
+
+                    <div class="form-group">
+                        <label for="address">Address of the Shop</label>
+                        <input
+                            id="address"
+                            type="text"
+                            placeholder="Address of the Shop"
+                            class="form-control"
+                        >
+                        <p class="text-secondary mt- mb-3 text-center">The assist will put a stimate address, move the pointer to the right place, please </p>
                     </div>
                 </fieldset>
 
