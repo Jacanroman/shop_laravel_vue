@@ -23,7 +23,7 @@ class CreateShopsTable extends Migration
         Schema::create('shops', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('categoria_id')->constrained('categories');
+            $table->foreignId('category_id')->constrained('categories');
             $table->string('main_image');
             $table->string('address');
             $table->string('lat');

@@ -28,6 +28,25 @@
                             </div>   
                         @enderror
                     </div>
+
+                    <div class="form-group">
+                        <label for="category">Category</label>
+
+                        <select 
+                            class="form-control @error('category_id') is-invalid @enderror"
+                            name="category_id"
+                            id="category"    
+                        >
+                            <option value="" selected disabled>--Select a Category--</option>
+
+                            @foreach($categories as $category)
+                                <option 
+                                    value="{{$category->id}}"
+                                    {{old('category_id') == $category->id ? 'selected' : ''}}>
+                                        {{$category->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </fieldset>
 
             </form>

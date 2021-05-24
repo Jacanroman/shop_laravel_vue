@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Shop;
 use Illuminate\Http\Request;
 
@@ -16,8 +17,11 @@ class ShopController extends Controller
      */
     public function create()
     {
-        //
-        return view('shops.create');
+        //Consultar las categorias de tiendas
+        $categories = Category::all();
+
+
+        return view('shops.create', compact('categories'));
     }
 
     /**
