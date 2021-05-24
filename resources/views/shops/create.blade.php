@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+@section('styles')
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin=""/>
+@endsection
+
 @section('content')
     <div class="container">
         <h1 class="text-center mt-4">Register New Shop</h1>
@@ -81,9 +88,21 @@
                         >
                         <p class="text-secondary mt- mb-3 text-center">The assist will put a stimate address, move the pointer to the right place, please </p>
                     </div>
+
+                    <div class="form-group">
+                        <div id="mapa" style="height:400px"></div>
+                    </div>
                 </fieldset>
 
             </form>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+  crossorigin=""></script>
+
 @endsection
