@@ -1,4 +1,5 @@
 import {OpenStreetMapProvider} from 'leaflet-geosearch';
+//import { truncate } from 'lodash';
 const provider = new OpenStreetMapProvider();
 
 
@@ -12,6 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const mapa = L.map('mapa').setView([lat, lng], 16);
 
+        //Eliminar pines previos
+
+        let markers = new L.FeatureGroup().addTo(mapa);
+
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(mapa);
@@ -23,6 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
             draggable: true,
             autoPan:true
         }).addTo(mapa);
+
+        //agregar el pin a las capas
+
+        markers.addLayer(marker);
 
         //Creando Geocode Service
 
@@ -37,8 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
         search.addEventListener('blur', searchAddress);
 
         
+        reubicarPin(marker);
+       
 
-        
+        function reubicarPin(marker){
+             
 
         //Detect movement of the marker
 
@@ -50,6 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
             vamos a la opcion _proto_ y estan todos los metodos disponibles*/
 
             const position = marker.getLatLng();
+
+            //console.log(position);
 
             //Centrar automaticamente
 
@@ -73,6 +87,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         });
+        }
+
+
 
         function llenarInputs(resultado){
             document.querySelector('#address').value = resultado.address.Address || '';
@@ -88,18 +105,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 provider.search({query: e.target.value + ' Liverpool UK '})
                     .then(resultado =>{
                         if(resultado[0]){
+
+                            //Limpiar pines previos
+                            markers.clearLayers();
+
                             geocodeService.reverse().latlng(resultado[0].bounds[0],16).run(function(error, resultado){
-                                //console.log(error);
-                
-                                console.log(resultado);
-                
-                                //marker.bindPopup(resultado.address.LongLabel);
-                                //marker.openPopup();
-                
-                
-                                //LLenar los campos
-                
-                                //llenarInputs(resultado);
+                               
+                                //fill the inputs
+                                llenarInputs(resultado);
+
+                                // move to the center the map
+                                mapa.setView(resultado.latlng);
+
+                                // move the marker
+
+                                marker = new L.marker(resultado.latlng,{
+                                    draggable: true,
+                                    autoPan: true
+                                }).addTo(mapa);
+
+                                //asignar el contenedor de marker el nuevo pin
+                                markers.addLayer(marker);
+
+                                //Mover el pin
+                                reubicarPin(marker);
                 
                             })
                         }
