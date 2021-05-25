@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         //Creando Geocode Service
 
         const geocodeService = L.esri.Geocoding.geocodeService({
-            apikey: 'apikey' // reemplazamos con nuestra api key 
+            apikey: '' // reemplazamos con nuestra api key 
         });
 
         
@@ -45,18 +45,28 @@ document.addEventListener('DOMContentLoaded', () => {
         
             //Reverse Geocoding, cuando el usuario reubica el pin
             geocodeService.reverse().latlng(position,16).run(function(error, resultado){
-                console.log(error);
+                //console.log(error);
 
-                console.log(resultado.address);
+                //console.log(resultado.address);
 
                 marker.bindPopup(resultado.address.LongLabel);
                 marker.openPopup();
+
+
+                //LLenar los campos
+
+                llenarInputs(resultado);
 
             })
 
 
         });
 
-        
+        function llenarInputs(resultado){
+            document.querySelector('#address').value = resultado.address.Address || '';
+            document.querySelector('#lat').value = resultado.latlng.lat || '';
+            document.querySelector('#lng').value = resultado.latlng.lng || '';
+
+        }
     }
 });

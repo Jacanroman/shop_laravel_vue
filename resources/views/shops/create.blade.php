@@ -84,9 +84,9 @@
                     <legend class="text-primary">Ubicacion</legend>
 
                     <div class="form-group">
-                        <label for="address">Address of the Shop</label>
+                        <label for="direccion">Address of the Shop</label>
                         <input
-                            id="address"
+                            id="direccion"
                             type="text"
                             placeholder="Address of the Shop"
                             class="form-control"
