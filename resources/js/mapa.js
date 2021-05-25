@@ -15,6 +15,25 @@ document.addEventListener('DOMContentLoaded', () => {
         let marker;
 
         // agregar el pin
-        marker = new L.marker([lat, lng]).addTo(mapa);
+        marker = new L.marker([lat, lng],{
+            draggable: true,
+            autoPan:true
+        }).addTo(mapa);
+
+        //Detect movement of the marker
+
+        marker.on('moveend', function(e){
+            //console.log('soltaste el pin');
+            marker = e.target;
+
+            /* para saber los metodos disponibles al hacer console.log(marker)
+            vamos a la opcion _proto_ y estan todos los metodos disponibles*/
+
+            const position = marker.getLatLng();
+
+            //Centrar automaticamente
+
+            mapa.panTo(new L.LatLng(position.lat, position.lng));
+        });
     }
 });
