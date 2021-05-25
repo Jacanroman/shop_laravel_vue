@@ -20,6 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
             autoPan:true
         }).addTo(mapa);
 
+        //Creando Geocode Service
+
+        const geocodeService = L.esri.Geocoding.geocodeService({
+            apikey: 'apikey' // reemplazamos con nuestra api key 
+        });
+
+        
+
         //Detect movement of the marker
 
         marker.on('moveend', function(e){
@@ -34,6 +42,21 @@ document.addEventListener('DOMContentLoaded', () => {
             //Centrar automaticamente
 
             mapa.panTo(new L.LatLng(position.lat, position.lng));
+        
+            //Reverse Geocoding, cuando el usuario reubica el pin
+            geocodeService.reverse().latlng(position,16).run(function(error, resultado){
+                console.log(error);
+
+                console.log(resultado.address);
+
+                marker.bindPopup(resultado.address.LongLabel);
+                marker.openPopup();
+
+            })
+
+
         });
+
+        
     }
 });
