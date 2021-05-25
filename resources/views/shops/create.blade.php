@@ -84,9 +84,9 @@
                     <legend class="text-primary">Ubicacion</legend>
 
                     <div class="form-group">
-                        <label for="direccion">Address of the Shop</label>
+                        <label for="formbuscador">Address of the Shop</label>
                         <input
-                            id="direccion"
+                            id="formbuscador"
                             type="text"
                             placeholder="Address of the Shop"
                             class="form-control"
@@ -130,10 +130,10 @@
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-  crossorigin=""></script>
+  crossorigin="" defer></script>
 
-  <script src="https://unpkg.com/esri-leaflet"></script>
+  <script src="https://unpkg.com/esri-leaflet" defer></script>
 
-  <script src="https://unpkg.com/esri-leaflet-geocoder"></script>
+  <script src="https://unpkg.com/esri-leaflet-geocoder" defer></script>
 
 @endsection

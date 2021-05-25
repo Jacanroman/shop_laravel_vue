@@ -1,3 +1,7 @@
+import {OpenStreetMapProvider} from 'leaflet-geosearch';
+const provider = new OpenStreetMapProvider();
+
+
 document.addEventListener('DOMContentLoaded', () => {
 
     if(document.querySelector('#mapa')){
@@ -23,8 +27,16 @@ document.addEventListener('DOMContentLoaded', () => {
         //Creando Geocode Service
 
         const geocodeService = L.esri.Geocoding.geocodeService({
-            apikey: '' // reemplazamos con nuestra api key 
+            apikey: 'AAPK11a24f9a279a45788f8eb3da37ddaa52i0K2WPe75sE2EYcY_QKy0WUBPFmZYoAscNW_k4uP-9cGYtpZp75sXFVzsfZ10wyt' // reemplazamos con nuestra api key 
         });
+
+        //Buscador de direcciones
+
+        const search = document.querySelector('#formbuscador');
+
+        search.addEventListener('blur', searchAddress);
+
+        
 
         
 
@@ -67,6 +79,36 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('#lat').value = resultado.latlng.lat || '';
             document.querySelector('#lng').value = resultado.latlng.lng || '';
 
+        }
+
+        function searchAddress(e){
+
+            //console.log(provider)
+            if(e.target.value.length > 1){
+                provider.search({query: e.target.value + ' Liverpool UK '})
+                    .then(resultado =>{
+                        if(resultado[0]){
+                            geocodeService.reverse().latlng(resultado[0].bounds[0],16).run(function(error, resultado){
+                                //console.log(error);
+                
+                                console.log(resultado);
+                
+                                //marker.bindPopup(resultado.address.LongLabel);
+                                //marker.openPopup();
+                
+                
+                                //LLenar los campos
+                
+                                //llenarInputs(resultado);
+                
+                            })
+                        }
+                    })
+                    .catch(error =>{
+                        console.log(error);
+                    })
+            }
+            
         }
     }
 });
